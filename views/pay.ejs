@@ -1,0 +1,137 @@
+
+	
+   
+
+<%- include('header.ejs'); -%>
+<link rel="stylesheet" href="/css/select2.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/select2.min.js"></script>
+<style>
+  .select2-dropdown {
+    top: 22px !important;
+    left: 8px !important;
+  }
+</style>
+
+<div class=" content-area" >
+    <div class="page-header">
+        <h4 class="page-title">Crazy2Engineers</h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Add</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pay Bill</li>
+        </ol>
+    </div>
+    <div class="col-xl-6" >
+    <div class="card m-b-20">
+      <div class="card-header">
+        <h3 class="card-title" >Pay Bill</h3>
+        
+      </div>
+      <div class="card-body"  >
+        <form  method="POST" action="/pay_add" ref='uploadForm' id='uploadForm'  >
+          <input type="text" name="purchase" value="<%= pay._id %>" hidden >
+          <div class="form-group">
+              <label class="form-label" for="exampleInputEmail1">Supplier Name</label>
+              <input type="text" class="form-control" name="supplierp_name" value="<%= pay.supplier_name %>" id="place" placeholder="Enter place"
+              pattern="[a-zA-Z\s]{3,15}"
+              title="supplierp_name should only contain lowercase letters 3-15. e.g. hardik"    required disabled>
+            </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Supplier Place</label>
+            <input type="text" class="form-control" name="supplierp_place" value="<%= pay.supplierp_place %>" id="place" placeholder="Enter place"
+            pattern="[a-zA-Z\s]{3,15}"
+              title="supplierp_place should only contain lowercase letters 3-15. e.g. palanpur"    required disabled>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Bill No</label>
+            <input type="text" class="form-control"   id="bill" value="<%=pay.purchase_billno %>"  payholder="Enter billno" pattern="[0-9]{1,15}"
+            title="Bill should only contain Number . e.g. 1234567890" required disabled>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">TotalAmount</label>
+            <input type="text" class="form-control "   id='amount' value="<%=pay.purchase_unpaidamount%>"  payholder="Enter Number" pattern="[0-9]{1,10}"
+            title="Amount should only contain Number . e.g. 1234567890" required disabled>
+          </div>
+          <div class="form-group">
+                <label class="form-label" for="exampleInputEmail1">pay Amount</label>
+                <input type="text" class="form-control "  name="pay_amount" id='payAmount'  payholder="Enter amount" pattern="[0-9]{1,10}"
+                title="Amount should only contain Number . e.g. 1234567890"  required>
+              </div>
+            
+                <label class="form-label" for="exampleInputEmail1">Remaining Amount</label>
+                <p class="form-control"  name="pay_remaining" id='subt' ></p>
+            
+              <div class="form-group">
+                    <label class="form-label" for="exampleInputEmail1">Date of Pay</label>
+                    <input type="date" class="form-control"  name="pay_date" id="theDate"  payholder="Enter date" required>
+                    <script type="text/javascript">
+                        var date = new Date();
+                      
+                      var day = date.getDate();
+                      var month = date.getMonth() + 1;
+                      var year = date.getFullYear();
+                      
+                      if (month < 10) month = "0" + month;
+                      if (day < 10) day = "0" + day;
+                      
+                      var today = year + "-" + month + "-" + day;
+                      
+                      
+                      document.getElementById('theDate').value = today;
+                      </script>
+                  </div>
+                  <% if(pay.pay_recno=="enter number" ){%>
+                
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputEmail1">Rec No</label>
+                        <input type="text" class="form-control"  name="pay_recno" id="exampleInputname" value=""  payholder="<%= pay.pay_recno %>" pattern="[1-9]{1,10}"
+                        title="Rec should only contain Number . e.g. 1234567890" required>
+                      </div>
+                    <%}else{%>
+                      <div class="form-group">
+                          <label class="form-label" for="exampleInputEmail1">Rec No</label>
+                          <p class="form-control"  name="pay_recno" id="exampleInputname"  payholder="Enter Number" required><%= pay.pay_recno %></p>
+                        <input type="text" class="form-control"  name="pay_recno" id="exampleInputname" value="<%= pay.pay_recno %>"  payholder="Enter Number" required hidden>
+
+                        </div>
+                        <%}%>
+              
+          <div class="form-group mb-0">
+            <div class="checkbox checkbox-secondary">
+              <button type="submit" class="btn btn-success">Pay <i class="fa fa-check fa-spin ml-2"></i></button>
+            </div>
+          </div>
+        
+        </form>
+      </div>
+    </div>
+    
+  
+ 
+<script>
+  $("#country").select2({
+    placeholder: "Select Supplier",
+    allowClear: true
+  });
+</script>
+
+<script>
+ $(document).ready(function() {
+ $(function() {
+ $("#amount, #payAmount").on("keydown keyup", sub);
+ function sub() {
+ $("#subt").html(Number($("#amount").val()) - Number($("#payAmount").val()));
+ }
+ });    
+
+ });    
+  </script>
+  </div>
+
+
+     
+			<%- include('footer.ejs'); -%>
+
+
+                              
+			

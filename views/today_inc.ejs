@@ -1,0 +1,65 @@
+
+	
+   
+
+<%- include('header.ejs'); -%>
+<div class=" content-area" >
+    <div class="page-header">
+        <h4 class="page-title">Crazy2Engineers</h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Add</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Today Work</li>
+        </ol>
+    </div>
+    <div class="col-xl-6">
+    <div class="card m-b-20">
+      <div class="card-header">
+        <h3 class="card-title" >Today Work</h3>
+        
+      </div>
+      <div class="card-body"  >
+        <form  method="POST" action="/today_inc" ref='uploadForm' id='uploadForm'  >
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Date</label>
+          
+            <input type="date" class="form-control"  name="today_inc_date" id="theDate"  placeholder="Enter Name" required>
+            <script type="text/javascript">
+                var date = new Date();
+              
+              var day = date.getDate();
+              var month = date.getMonth() + 1;
+              var year = date.getFullYear();
+              
+              if (month < 10) month = "0" + month;
+              if (day < 10) day = "0" + day;
+              
+              var today = year + "-" + month + "-" + day;
+              
+              
+              document.getElementById('theDate').value = today;
+              </script>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Amount</label>
+            <input type="text" class="form-control"  name="today_inc_amount" id="exampleInputname"  placeholder="Enter place" placeholder="Enter Amount" pattern="[0-9]{1,10}"
+            title="Username should only contain Number. e.g. 1234567890" required>
+          </div>
+          
+          
+          <div class="form-group mb-0">
+            <div class="checkbox checkbox-secondary">
+              <button type="submit" class="btn btn-success">submit <i class="fa fa-check fa-spin ml-2"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+     
+			<%- include('footer.ejs'); -%>
+
+
+                              
+			

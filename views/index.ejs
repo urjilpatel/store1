@@ -1,0 +1,84 @@
+<%- include('header.ejs'); -%>
+
+
+<div class=" content-area ">
+
+		<div class="page-header">
+				<h4 class="page-title">Crazy2Engineers</h4>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Crazy2Engineers</li>
+				</ol>
+			</div>	
+					<div class="row">
+							<div class="col-sm-12 col-lg-4">
+								<div class="card overflow-hidden">
+									<div class="card-header">
+										<h3 class="card-title"><i class="fa fa-futbol-o mr-2 sidebarred"></i> Purchase</h3>
+										<div class="card-options">
+											<a class="btn btn-sm btn-primary" href="/purchase_view">View</a>
+										</div>
+									</div>
+									<div class="card-body text-center">
+
+										<small class="h6">Total Purchase</small>
+										<div class="text-dark count mt-0 font-30"><%= purchase.length%></div>
+
+										<div class="progress progress-sm mt-0 mb-2">
+											<div class="progress-bar bg-success w-100" role="progressbar"></div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-lg-4">
+								<div class="card overflow-hidden">
+									<div class="card-header">
+										<h3 class="card-title"><i class="fa fa-file-text mr-2 sidebarblue"></i> Supplier</h3>
+										<div class="card-options">
+											<a class="btn btn-sm btn-primary" href="/supplier_view">View</a>
+										</div>
+									</div>
+									<div class="card-body text-center">
+
+										<small class="h6"> Total Supplier</small>
+										<div class="text-dark count mt-0 font-30"><%= supplier.length%></div>
+
+										<div class="progress progress-sm mt-0 mb-2">
+											<div class="progress-bar bg-primary w-100" role="progressbar" ></div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-lg-4">
+								<div class="card overflow-hidden">
+									<div class="card-header">
+										<h3 class="card-title"><i class="fa fa-diamond mr-2 sidebarpink"></i>Total income</h3>
+										<div class="card-options">
+											<a class="btn btn-sm btn-primary" href="/today_inc_view">View</a>
+										</div>
+									</div>
+									<div class="card-body text-center">
+
+										<small class="h6">Total Day</small>
+										<div class="text-dark count mt-0 font-30"><%= today_inc.length%></div>
+
+										<div class="progress progress-sm mt-0 mb-2">
+											<div class="progress-bar bg-danger w-100" role="progressbar" ></div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+<%- include('footer.ejs'); -%>

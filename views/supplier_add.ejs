@@ -1,0 +1,56 @@
+
+	
+   
+
+<%- include('header.ejs'); -%>
+
+<div class=" content-area" >
+    <div class="page-header">
+        <h4 class="page-title">Crazy2Engineers</h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Add</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Supplier</li>
+        </ol>
+    </div>
+    <div class="col-xl-6" >
+    <div class="card m-b-20">
+      <div class="card-header">
+        <h3 class="card-title" >Supplier Add</h3>
+        
+      </div>
+      <div class="card-body"  >
+        <form  method="POST" action="/Supplier_add" ref='uploadForm' id='uploadForm'  >
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Supplier  Name</label>
+            <input type="text" class="form-control"  name="supplier_name" id="exampleInputname"  placeholder="Enter Name"  pattern="[a-zA-Z\s]{3,35}"
+            title="Supplier should only contain uppercase and lowercase letters 3-35. e.g. hardik" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Supplier Place</label>
+            <input type="text" class="form-control"  name="supplierp_place" id="exampleInputname"  placeholder="Enter place"  pattern="[a-zA-z\s]{3,35}"
+            title="Supplier should only contain uppercase and lowercase letters 3-35. e.g. palanpur" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Contact Num</label>
+            <input type="text" class="form-control"  name="supplier_contact" id="exampleInputname"  placeholder="Enter Number"  pattern="[0-9]{10}"
+            title="Contact should only contain Number of 10 digit. e.g. 1234567890" required>
+          </div>
+          
+          <div class="form-group mb-0">
+            <div class="checkbox checkbox-secondary">
+              <button type="submit" class="btn btn-success">submit <i class="fa fa-check fa-spin ml-2"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  
+  </div>
+
+
+     
+			<%- include('footer.ejs'); -%>
+
+
+                              
+			

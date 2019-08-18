@@ -1,0 +1,172 @@
+<%- include('header.ejs'); -%>
+<style>
+  .select2-dropdown {
+    top: 22px !important;
+    left: 8px !important;
+  }
+</style>
+<link rel="stylesheet" href="/css/select2.min.css" />
+
+<div class=" content-area">
+    <div class="page-header">
+        <h4 class="page-title">Crazy2Engineers</h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Add</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Purchase</li>
+        </ol>
+    </div>
+  <div class="col-xl-6">
+    <div class="card m-b-20">
+      <div class="card-header">
+        <h3 class="card-title">Purchase Add</h3>
+
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/purchase_add" ref='uploadForm' id='uploadForm'>
+          <div class="form-group">
+
+            <select id="country" name="supplier_name" onchange="showCustomer(this.value)">
+              <option value=''>Supplier Name</option>
+              <% if(supplier_view.length>0) { %>
+              <% for(var i=0 ;i<supplier_view.length;i++) {%>
+              <option value='<%= supplier_view[i]._id %>'><%= supplier_view[i].supplier_name %></option>
+              <% } %>
+              <% } else {%>
+              Not Record Found
+              <% } %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Supplier Place</label>
+            <input type="text" class="form-control" name="supplierp_place" value="" id="text" placeholder="Enter place"
+            pattern="[a-zA-Z\s]{3,35}"
+            title="Supplier should only contain uppercase and lowercase letters 3-35. e.g. palanpur" required>
+          </div>
+
+       
+
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Bill No</label>
+            <input type="text" class="form-control" name="purchase_billno" id="exampleInputname"
+              placeholder="Enter Number" pattern="[0-9]{1,10}"
+              title="Bill should only contain Number . e.g. 1234567890" required>
+          </div>
+          <div class="form-group">
+
+            <label class="form-label" for="exampleInputEmail1">Date</label>
+            <input type="date" class="form-control" name="date" id="theDate" placeholder="Enter Date" required>
+
+            <script type="text/javascript">
+              var date = new Date();
+
+              var day = date.getDate();
+              var month = date.getMonth() + 1;
+              var year = date.getFullYear();
+
+              if (month < 10) month = "0" + month;
+              if (day < 10) day = "0" + day;
+
+              var today = year + "-" + month + "-" + day;
+
+
+              document.getElementById('theDate').value = today;
+            </script>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Amount</label>
+            <input type="text" class="form-control" name="purchase_amount" id="exampleInputname"
+              placeholder="Enter Amount" pattern="[0-9]{1,10}"
+              title="Amount should only contain Number . e.g. 1234567890" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Disc
+              <input type="checkbox" name="dis" value="dis" id="User_gender" >
+
+            </label>
+
+          </div>
+          <div class="form-group">
+            <label>Pay</label><br>
+            <label>
+              <input type="radio" name="pay" id="paid" onclick=" myFunction()"  value="paid">
+              Paid
+            </label>
+            <label>
+              <input type="radio" name="pay" id="unpaid" onclick=" myFunction1()" value="unpaid">
+              Unpaid
+            </label>
+          </div>
+           <div id="demo"></div>
+          <div class="form-group mb-0">
+            <div class="checkbox checkbox-secondary">
+              <button type="submit" class="btn btn-success">submit <i
+                  class="fa fa-check fa-spin ml-2"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script>
+      $("#country").select2({
+        placeholder: "Select Supplier",
+        allowClear: true
+      });
+    </script>
+       <script>
+        function showCustomer(str) {
+          var xhttp;
+          if (str == "") {
+            document.getElementsById("text").innerHTML = "";
+            return;
+          }
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              var data = JSON.parse(this.response);
+              document.getElementById("text").value = data.place;
+            }
+          };
+          xhttp.open("GET", "supplierp_place?q=" + str, true);
+          xhttp.send();
+        }
+        
+      </script>
+<script>
+ function myFunction() {
+    var x = document.getElementById("paid").value;
+   
+  console.log(x);
+ 
+    if(x=="paid" ){
+      document.getElementById("demo").innerHTML = ` <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Res_no</label>
+            <input type="text" class="form-control" name="pay_recno" id="exampleInputname"
+              placeholder="Enter Number" pattern="[1-9]{1,10}"
+              title="Username should only contain Number . e.g. 1234567890" required >
+          </div> `;
+    }
+  
+  }
+  function myFunction1() {
+    var x = document.getElementById("unpaid").value;
+   
+  console.log(x);
+ 
+    if(x=="unpaid" ){
+      document.getElementById("demo").innerHTML = ` <div class="form-group">
+            <label class="form-label" for="exampleInputEmail1">Res_no</label>
+            <input type="text" class="form-control" name="pay_recno" id="exampleInputname"
+              placeholder="Enter Number" pattern="[1-9]{1,10}"
+              title="Username should only contain Number . e.g. 1234567890" required disabled>
+          </div> `;
+    }
+  
+  }
+</script>
+  </div>
+
+
+
+  <%- include('footer.ejs'); -%>

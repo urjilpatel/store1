@@ -1,0 +1,82 @@
+<%- include('header.ejs'); -%>
+
+<div class=" content-area"  >
+    <div class="col-md-12 col-lg-12" style="margin-top:30px">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Total income
+                        View</div>
+                    <div class="card-options">
+                        <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                        <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                            
+                        <div id="example" class="table table-striped table-bordered"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="example_length"><label>Show <select name="example_length" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="example_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"></label></div></div></div><div class="row"><div class="col-sm-12">
+                            <table id="sum_table" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="example_info">
+                                <% if(today_inc_view.length>0) { %>    
+        <thead>
+            <tr role="row">
+                <th>No</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+      <tbody>
+            <% for(var i=0 ;i<today_inc_view.length;i++) {%>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= moment( today_inc_view[i].today_inc_date ).format( 'DD-MMM-YYYY')  %> </td>
+            <td><%= today_inc_view[i].today_inc_amount %><input type="text" value="<%= today_inc_view[i].today_inc_amount %>" name="qty1" id="qty" hidden/></td>
+        <td><a href="/Pay" class="fa fa-money" style="background-color:Tomato;" >Pay Now</a></td>
+       
+        
+
+
+          </tr>
+          <% } %>
+          <td>Total</td>
+          <td> </td>
+          <td  id="total" ></td>
+          <td ><button onclick="sumInputs()" style="background-color: green;color:balck;padding:0px 20px;">Sum</button></td>
+          
+          
+
+
+      </tbody>
+      <% } else {%>
+        Not Record Found
+        <% } %>
+    </table>
+    <script>
+    
+   function sumInputs() {
+    var inputs = document.getElementsByTagName('input'),
+        result = document.getElementById('total'),
+        sum = 0;            
+    
+    for(var i=0; i<inputs.length; i++) {
+        var ip = inputs[i];
+    
+        if (ip.name && ip.name.indexOf("total") < 0) {
+            sum += parseInt(ip.value) || 0;
+        }
+    
+    }
+    
+    result.innerHTML = sum;
+}
+    </script>
+    <a href="/purchase_add"><input type="button" value="Add Purchase"/></a>
+                                
+                            </div></div>
+                            </div>
+                        </div>
+                        <!-- table-wrapper -->
+                    </div>
+                    <!-- section-wrapper -->
+   
+   <%- include('footer.ejs'); -%>

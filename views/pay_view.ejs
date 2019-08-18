@@ -1,0 +1,64 @@
+<%- include('header.ejs'); -%>
+
+<div class=" content-area" >
+    <div class="col-md-12 col-lg-12" style="margin-top:30px">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Purchase View</div>
+                    <div class="card-options">
+                        <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                        <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                            
+                        <div id="example" class="table table-striped table-bordered"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="example_length"><label>Show <select name="example_length" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="example_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"></label></div></div></div><div class="row"><div class="col-sm-12">
+                            <table id="example" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="example_info">
+                                <% if(pay_view.length>0) { %>    
+        <thead>
+
+            <tr role="row">
+                <th>No</th>
+                <th>Name</th>
+                <th>Place</th>
+                <th>Bill No</th>
+                <th>Total Amount </th>
+                <th>pay amount</th>
+                <th>pay remaining</th>
+                <th>Date</th>
+                
+                <th>pay_recno</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+      <tbody>
+            <% for(var i=0 ;i<pay_view.length;i++) {%>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= pay_view[i].purchase.supplier_name %></td>
+            <td><%= pay_view[i].purchase.supplierp_place %></td>
+            <td><%= pay_view[i].purchase.purchase_billno %></td>
+            <td><%= pay_view[i].purchase.purchase_amount %></td>
+            <td><%= pay_view[i].pay_amount %></td>
+            <td><%= pay_view[i].pay_remaining %></td>
+           
+            <td><%= pay_view[i].pay_date %></td>
+            <td><%= pay_view[i].pay_recno %></td>
+          </tr>
+          <% } %>
+      </tbody>
+      <% } else {%>
+        Not Record Found
+        <% } %>
+    </table>
+    <a href="/purchase_add"><input type="button" value="Add Purchase"/></a>
+                                
+                            </div></div>
+                            </div>
+                        </div>
+                        <!-- table-wrapper -->
+                    </div>
+                    
+                    <!-- section-wrapper -->
+   <%- include('footer.ejs'); -%>
